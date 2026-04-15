@@ -92,7 +92,7 @@ hashcat -m 23100 --keep-guessing hashes.txt wordlist.txt
 python3 legacy/chainbreaker.py --password CrackedPassword -a /path/to/login.keychain
 
 # Or use a memory-extracted master key (from volatility/volafox)
-python3 legacy/chainbreaker.py --key 26C80BE3346E720DAA10620F2C9C8AD726CFCE2B818942F9 -a /path/to/login.keychain
+python3 legacy/chainbreaker.py --key <HEXKEY> -a /path/to/login.keychain
 ```
 
 ## Tool Details
