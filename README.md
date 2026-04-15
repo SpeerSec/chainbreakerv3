@@ -44,7 +44,7 @@ chainbreakerv3/
 ### Step 1: Recon (always run first)
 
 ```bash
-# As root on the target. No password needed. Tells you what you're dealing with.
+# As root
 sudo python3 live/kc_recon.py
 ```
 
