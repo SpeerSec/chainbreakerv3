@@ -99,8 +99,6 @@ python3 legacy/chainbreaker.py --key 26C80BE3346E720DAA10620F2C9C8AD726CFCE2B818
 
 ### `live/kc_recon.py` - Reconnaissance and Hash Extraction
 
-**Run this first on every engagement.** It tells you what format the keychains are in, which determines your entire approach.
-
 - Enumerates all `.keychain` and `.keychain-db` files on the system
 - Identifies format (legacy binary vs SQLite) by reading file headers
 - Extracts hashcat-compatible hashes (mode 23100) from legacy keychains
@@ -108,8 +106,6 @@ python3 legacy/chainbreaker.py --key 26C80BE3346E720DAA10620F2C9C8AD726CFCE2B818
 - Attempts `/var/db/SystemKey` extraction with format identification
 - Checks SIP status, logged-in users, and `securityd` process state
 - Outputs full JSON to `/tmp/.kc_recon.json`
-
-**OPSEC:** Moderate noise. File reads and process enumeration only. No keychain API calls, no prompts, no network activity.
 
 ### `live/kc_dump.py` - Live Credential Extraction
 
@@ -141,10 +137,9 @@ Complete Python 3.12+ rewrite of the original chainbreaker tool. Parses legacy b
 
 - Extracts: generic passwords, internet passwords, AppleShare passwords, private keys, public keys, X509 certificates, crackable password hashes
 - Unlock methods: password, hex master key, SystemKey file
-- Dependencies: `cryptography` library only
 - Removed: `pyDes.py` (replaced by `cryptography` TripleDES), `pbkdf2.py` (replaced by `hashlib.pbkdf2_hmac`)
 
-This is the tool for forensic disk image analysis and offline work. It does not require macOS to run.
+This is the script for forensic disk image analysis and offline work. It does not require macOS to run.
 
 ## Common Keychain Locations
 
@@ -153,30 +148,6 @@ This is the tool for forensic disk image analysis and offline work. It does not 
 | User login | `~/Library/Keychains/login.keychain` or `login.keychain-db` | User's login password |
 | System | `/Library/Keychains/System.keychain` | `/var/db/SystemKey` (or auto-unlocked at boot) |
 | Local Items | `~/Library/Keychains/<UUID>/` | Derived from user password + SEP |
-
-## Version History
-
-### v3.0 - @SpeerSec Fork (2026)
-
-- Complete rewrite from Python 2 to Python 3.12+
-- Removed `pyDes.py` and `pbkdf2.py` (replaced with `cryptography` and `hashlib`)
-- Fixed all bytes/string separation issues, integer division, Python 2 syntax
-- Fixed bug where CLI hashed filename instead of file contents
-- Added `kc_recon.py` for target reconnaissance and hash extraction
-- Added `kc_dump.py` dual-API live dumper (legacy + modern SecItem API)
-- Added `--system` flag for passwordless System keychain extraction
-- Added graceful error handling for malformed/truncated keychain files
-
-### v2.0 - Just1uke Fork (2020)
-
-- Refactored from original chainbreaker
-- Added hashcat hash extraction
-- Added export functionality
-- Improved CLI interface
-
-### v1.0 - n0fate Original
-
-- Original macOS keychain forensic tool
 
 ## Requirements
 
@@ -192,4 +163,3 @@ pip install -r requirements.txt
 
 - Original [chainbreaker](https://github.com/n0fate/chainbreaker) by [n0fate](https://twitter.com/n0fate)
 - v2 refactor by [Luke Gaddie](https://github.com/Just1uke/chainbreaker)
-- v3 rewrite and live tooling by [@SpeerSec](https://github.com/SpeerSec)
