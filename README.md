@@ -24,7 +24,7 @@ chainbreakerv3/
 |   |-- kc_recon.py            # Recon and hash extraction (run first)
 |   |-- kc_dump.py             # Credential dumper (dual-API)
 |
-|-- LICENSE                    # GPL-2.0
+|-- LICENSE                    # GPL-3.0
 |-- requirements.txt           # Python dependencies
 |-- README.md                  # This file
 ```
